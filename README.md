@@ -1,6 +1,10 @@
 # CRM Webhook Service
 
-A minimal Express-based webhook microservice for SAP Sales and Service Cloud V2 that demonstrates both synchronous and asynchronous integration patterns. This service receives webhooks from SAP CRM, calculates custom scores based on ABC classification, and updates accounts accordingly.
+A minimal Express-based webhook microservice for SAP Sales and Service Cloud V2 that demonstrates both synchronous and asynchronous integration patterns. This service receives webhooks from SAP Sales and Service Cloud V2, calculates custom scores based on ABC classification, and updates accounts accordingly.
+
+This is a very simplified example. You could achieve the same result also with the in-app no-code tools of the in-build customization (a simple if this than that) but I want with this example to show the different nature of the sync and async options you have when writing custom logic. Also I want to convince you that this is a very powerful option to do custom code with external microservices. Your business logic inside those "cloud functions" can then get as complicated as you want ;)
+
+Personaly I would recommend to build this central extension microservice where you can place all your endpoints for custom logic and maintain all your custom code in a central place.
 
 ## ✨ Features
 
@@ -18,36 +22,44 @@ A minimal Express-based webhook microservice for SAP Sales and Service Cloud V2 
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### Prerequisites
+- Node.js 22.x or higher
+- SAP Sales and Service Cloud V2 access with API credentials
 
-```bash
-npm install
-```
+### Setup
 
-### 2. Configure SAP CRM Credentials
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd crm-webhook-service
+   ```
 
-```bash
-copy env-template.txt .env
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Edit `.env` with your credentials:
+3. **Configure environment**
+   ```bash
+   copy env-template.txt .env
+   ```
+   
+   Edit `.env` with your SAP CRM credentials:
+   ```env
+   CRM_BASE_URL=https://your-tenant.crm.cloud.sap
+   CRM_USERNAME=your-username
+   CRM_PASSWORD=your-password
+   PORT=3000
+   ```
 
-```env
-CRM_BASE_URL=https://your-tenant.crm.cloud.sap
-CRM_USERNAME=your-username
-CRM_PASSWORD=your-password
-PORT=3000
-```
+4. **Start the service**
+   ```bash
+   npm run dev
+   ```
+   
+   Service runs on `http://localhost:3000`
 
-### 3. Start the Service
-
-```bash
-npm run dev
-```
-
-The service will start on `http://localhost:3000`
-
-### 4. Test with curl
+5. **Test the webhooks**
 
 **Synchronous webhook:**
 ```bash
