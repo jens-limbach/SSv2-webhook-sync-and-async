@@ -1,0 +1,11 @@
+---
+applications:
+- name: crm-webhook-service
+  memory: 128M
+  instances: 1
+  buildpack: nodejs_buildpack
+  command: node server.js
+  env:
+    NODE_ENV: production
+  health-check-type: http
+  health-check-http-endpoint: /health
