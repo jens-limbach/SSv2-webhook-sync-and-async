@@ -167,6 +167,7 @@ app.post('/webhooks/calculate-score-sync', (req, res) => {
 
     console.log(`✅ Calculated score: ${calculatedScore} (ABC: ${abcClassification})`)
 
+    console.log(`✅ Returning response with updated CustomScore...`)
     // Create response data from currentImage and update only CustomScore
     const responseData = {
       ...data.currentImage,
@@ -175,11 +176,13 @@ app.post('/webhooks/calculate-score-sync', (req, res) => {
         CustomScore: calculatedScore
       }
     }
+    
 
     // Return response in CRM expected format
     res.status(200).json({
       data: responseData
     })
+    console.log(`✅ Returned updated account data with CustomScore: ${calculatedScore}`)
 
   } catch (error) {
     console.error('❌ Sync webhook error:', error)
